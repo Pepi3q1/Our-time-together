@@ -52,15 +52,16 @@ h1 {
 
 .counter {
   display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 14px;
-  width: min(92vw, 520px);
+  grid-template-columns: repeat(6, 1fr);
+  gap: 12px;
+  width: min(94vw, 960px);
 }
 
-@media (min-width: 640px) {
+@media (max-width: 700px) {
   .counter {
-    grid-template-columns: repeat(4, 1fr);
-    width: min(92vw, 760px);
+    grid-template-columns: repeat(3, 1fr);
+    gap: 10px;
+    width: min(94vw, 420px);
   }
 }
 
@@ -127,7 +128,7 @@ h1, .counter, .msg, .msgone {
   color: #c9b6e6;
 }
 
-@media (max-width: 639px) {
+@media (max-width: 700px) {
   main {
     gap: 22px;
     padding: 24px 16px;
@@ -143,8 +144,9 @@ h1, .counter, .msg, .msgone {
   }
 
     .counter {
-    grid-template-columns: repeat(4, 1fr);
-    gap: 8px;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 10px;
+    width: min(94vw, 420px);
   }
 
   .box {

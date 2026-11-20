@@ -1,18 +1,44 @@
 // Začetek 12. november 2026 mesec 10 = november ker se meseci štejejo od 0
 const zacetek = new Date(2026, 10, 12, 0, 0, 0);
 
+const elL = document.getElementById("l");
+const elMe = document.getElementById("me");
 const elD = document.getElementById("d");
 const elH = document.getElementById("h");
 const elM = document.getElementById("m");
 const elS = document.getElementById("s");
 
 function posodobi() {
-  const razlika = Math.max(0, Math.floor((Date.now() - zacetek.getTime()) / 1000));
+  const zdaj = new Date();
+  const od = zacetek;
 
-  elD.textContent = Math.floor(razlika / 86400);
-  elH.textContent = Math.floor((razlika % 86400) / 3600);
-  elM.textContent = Math.floor((razlika % 3600) / 60);
-  elS.textContent = razlika % 60;
+  // pred začetkom ne prikaži negativnih vrednosti
+  if (zdaj < od) return;
+
+  let leta = zdaj.getFullYear() - od.getFullYear();
+  let meseci = zdaj.getMonth() - od.getMonth();
+  let dnevi = zdaj.getDate() - od.getDate();
+  let ure = zdaj.getHours() - od.getHours();
+  let minute = zdaj.getMinutes() - od.getMinutes();
+  let sekunde = zdaj.getSeconds() - od.getSeconds();
+
+  // "posodi" od večje enote, če je manjša negativna
+  if (sekunde < 0) { sekunde += 60; minute--; }
+  if (minute < 0) { minute += 60; ure--; }
+  if (ure < 0) { ure += 24; dnevi--; }
+  if (dnevi < 0) {
+    // število dni v prejšnjem mesecu
+    dnevi += new Date(zdaj.getFullYear(), zdaj.getMonth(), 0).getDate();
+    meseci--;
+  }
+  if (meseci < 0) { meseci += 12; leta--; }
+
+  elL.textContent = leta;
+  elMe.textContent = meseci;
+  elD.textContent = dnevi;
+  elH.textContent = ure;
+  elM.textContent = minute;
+  elS.textContent = sekunde;
 }
 
 posodobi();
